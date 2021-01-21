@@ -16,6 +16,7 @@ function setUpCombat() {
 
     // Add an even listener to get attack btn
     document.getElementById('attack-btn').addEventListener('click', attack);
+
 }
 
 function timeLine() {
@@ -340,6 +341,7 @@ function endBattle() {
         if (bossFight) {
             document.getElementById("container").innerHTML = "";
             mapGen = generateTotalMap()
+            playerAboveMax();
             grid = mapGen.totalMap[0][mapGen.sCol][mapGen.sRow].map;
             bossFight = false;
             player.row = 5;
@@ -354,5 +356,14 @@ function endBattle() {
 
         changeStatusLog();
 
+    }
+}
+
+
+function playerAboveMax() {
+    for (let i = 0; i < players.length; i++) {
+        if (players[i].hp > players[i].maxHp) {
+            players[i].hp = players[i].maxHp;
+        }
     }
 }

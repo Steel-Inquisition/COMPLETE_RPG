@@ -46,25 +46,28 @@ function movePlayer(event) {
         let cellId = "cell" + player.row + "-" + player.col;
         document.getElementById(cellId).classList.remove("player");
 
+        let randomEnChance = 95;
+
         // Change based on cellID
-        onArrow(event, cellId);
+        onArrow(event, cellId, randomEnChance);
+
     }
 
 }
 
-function updatePlayer(newRow, newCol, cellId) {
+function updatePlayer(newRow, newCol, cellId, randomEnChance) {
 
     // set grid array to 0 for current location
     grid[player.row][player.col] = 0;
 
     // Set Difficulty
-    setDifficulty();
+    randomEnChance = setDifficulty(randomEnChance);
 
     // Update player location, based on location in area
     upDatePlayerLocation(newRow, newCol, grid);
 
     // Random Encounter
-    randomEncounter();
+    randomEncounter(randomEnChance);
 
     // Update class and grid
     upDateGrid(cellId);
@@ -228,16 +231,16 @@ function upDateGrid(cellId) {
     document.getElementById(cellId).classList.add("player");
 }
 
-function randomEncounter() {
+function randomEncounter(randomEnChance) {
     let random = randomInt(0, 100);
-    if (random > 95) {
+    if (random > randomEnChance) {
         setUpCombat(bossFight);
         modal2.style.display = "block";
         phase = "combat";
     }
 }
 
-function setDifficulty() {
+function setDifficulty(randomEnChance) {
     difficulty.movement += 1;
 
     if (difficulty.movement > 70) {
@@ -250,17 +253,22 @@ function setDifficulty() {
     }
     if (difficulty.movement > 220) {
         difficulty.stage = 3;
+        randomEnChance = 90;
     }
     if (difficulty.movement > 300) {
         difficulty.stage = 4;
+        randomEnChance = 80;
     }
     if (difficulty.movement > 400) {
         difficulty.stage = 5;
+        randomEnChance = 75;
     }
 
     // Change HTML
     document.getElementById('movement').innerHTML = `Movements: ${difficulty.movement}`;
     document.getElementById('stage').innerHTML = `Stage: ${difficulty.stage}`;
+
+    return randomEnChance;
 }
 
 function upDatePlayerLocation(newRow, newCol, grid) {
@@ -298,10 +306,10 @@ function upDatePlayerLocation(newRow, newCol, grid) {
     }
 }
 
-function onArrow(event, cellId) {
+function onArrow(event, cellId, randomEnChance) {
     if (event.keyCode == 39) { // right arrow key
         if (player.col < 9) {
-            updatePlayer(player.row, player.col + 1, cellId);
+            updatePlayer(player.row, player.col + 1, cellId, randomEnChance);
         } else {
             mapGen.totalMap[0][mapGen.sCol][mapGen.sRow].map[player.row][player.col] = 0;
 
@@ -309,7 +317,7 @@ function onArrow(event, cellId) {
         }
     } else if (event.keyCode == 37) { // left arrow key
         if (player.col > 0) {
-            updatePlayer(player.row, player.col - 1, cellId);
+            updatePlayer(player.row, player.col - 1, cellId, randomEnChance);
         } else {
             mapGen.totalMap[0][mapGen.sCol][mapGen.sRow].map[player.row][player.col] = 0;
 
@@ -317,7 +325,7 @@ function onArrow(event, cellId) {
         }
     } else if (event.keyCode == 38) { // Up arrow key
         if (player.row > 0) {
-            updatePlayer(player.row - 1, player.col, cellId);
+            updatePlayer(player.row - 1, player.col, cellId, randomEnChance);
 
         } else {
             mapGen.totalMap[0][mapGen.sCol][mapGen.sRow].map[player.row][player.col] = 0;
@@ -326,11 +334,13 @@ function onArrow(event, cellId) {
         }
     } else if (event.keyCode == 40) { // Down arrow key
         if (player.row < 9) {
-            updatePlayer(player.row + 1, player.col, cellId);
+            updatePlayer(player.row + 1, player.col, cellId, randomEnChance);
         } else {
             mapGen.totalMap[0][mapGen.sCol][mapGen.sRow].map[player.row][player.col] = 0;
 
             newMap(cellId);
         }
+    } else {
+        upDateGrid(cellId);
     }
 }

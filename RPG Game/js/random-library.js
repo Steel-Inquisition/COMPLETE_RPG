@@ -32,25 +32,25 @@ let modal2 = document.getElementById("myModal2");
 let keyIsDown = {};
 
 // If key is pressed, oprn up menu
-function keydownHandlerLib(event) {
+function keydownHandlerLib(choice) {
 
-    if (event.keyCode == 49) {
-        keyIsDown[event.keyCode] = true;
+    if (choice.keyCode == 49) {
+
+        keyIsDown[choice.keyCode] = true;
         modal.style.display = "block";
     }
-
-    // if (event.keyCode == 50) {
-    //     keyIsDown[event.keyCode] = true;
-    //     modal2.style.display = "block";
-    // }
 
 }
 
 // If key is not pressed, close menu
-function keyupHandlerLib(event) {
-    keyIsDown[event.keyCode] = false;
-    modal.style.display = "none";
-    // modal2.style.display = "none";
+function keyupHandlerLib(choice) {
+
+    if (choice.keyCode == 49) {
+
+        keyIsDown[choice.keyCode] = false;
+        modal.style.display = "none";
+    }
+
 }
 
 // Return random health
