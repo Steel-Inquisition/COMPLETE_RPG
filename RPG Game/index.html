@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>grid</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <h1>Grid Designer</h1>
+
+  <div id="container"></div>
+
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+
+      <ul id="stats">
+        <li><strong>Status!</strong></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- The Modal2 -->
+  <div id="myModal2" class="modal2">
+
+    <!-- Modal content2 -->
+    <div class="modal-content2" id="total">
+      <div class="playerMenu" id="playerMenu"></div>
+      <div class="enemyMenu" id="enemyMenu"></div>
+      <div class="actionMenu" id="actionMenu"><button
+          id='attack-btn'>ATTACK!</button></div>
+      <div class="timeMenu" id="timeMenu"></div>
+
+      <ul id="log2">
+
+      </ul>
+    </div>
+
+    <div class="logMenu" id="logMenu"></div>
+
+
+  </div>
+
+  <!-- Load JavaScript -->
+  <script src="js/random-library.js"></script>
+  <script src="js/grid.js"></script>
+  <script src="js/randomMaps.js"></script>
+  <script src="js/generatePlayer.js"></script>
+  <script src="js/rpgSystem.js"></script>
+  <script src="js/script.js"></script>
+
+</body>
+
+</html>
