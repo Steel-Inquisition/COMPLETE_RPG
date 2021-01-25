@@ -12,10 +12,15 @@ function setUpCombat() {
     // if player or monster attacking, set HTML to select either attack or next turn
     nextAttackerBtn();
 
+    // if fighting boss, change run button to can't run
+    canRun();
+
     console.log(monsters);
 
     // Add an even listener to get attack btn
     document.getElementById('attack-btn').addEventListener('click', attack);
+    document.getElementById('run-btn').addEventListener('click', run);
+
 
 }
 
@@ -44,6 +49,24 @@ function timeLine() {
     }
 
     return array;
+}
+
+function run() {
+    let runChance = 0;
+
+    runChance = randomInt(0, 10);
+
+    if (bossFight) {
+
+    } else {
+        if (runChance > 5) {
+            monsters = [];
+            endBattle();
+        } else {
+            attack();
+        }
+    }
+
 }
 
 // Get attacker, defender, events, to get damage. Damage is boosted by events, classes, weapons, bonus, and subtracted b. Calculate if player is dead. If only one player is left, they win!
@@ -191,14 +214,14 @@ function attackStatus(defender, attacker, damage, logEl, text) {
 }
 
 // Check players array and see if they are dead or not
-function playerIsDead(attacker, defender, text, logEl,) {
+function playerIsDead(attacker, defender, text, logEl, ) {
 
     // REMOVE PLAYER IF DEAD
     for (let i = 0; i < players.length; i++) {
 
         if (players[i].hp <= 0) {
 
-            causeOfDeath(attacker, defender, text, logEl,);
+            causeOfDeath(attacker, defender, text, logEl, );
 
             players.splice(i, 1);
 
@@ -212,7 +235,7 @@ function playerIsDead(attacker, defender, text, logEl,) {
 
         if (monsters[i].hp <= 0) {
 
-            causeOfDeath(attacker, defender, text, logEl,);
+            causeOfDeath(attacker, defender, text, logEl, );
 
             monsters.splice(i, 1);
 
@@ -311,6 +334,12 @@ function nextAttackerBtn() {
         document.getElementById('attack-btn').innerHTML = "NEXT TURN";
     } else {
         document.getElementById('attack-btn').innerHTML = "ATTACK!";
+    }
+}
+
+function canRun() {
+    if (bossFight) {
+        document.getElementById('run-btn').innerHTML = "Can't Run!";
     }
 }
 
