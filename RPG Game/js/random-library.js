@@ -167,16 +167,29 @@ function randomChest() {
         } else if (random == 1) {
             players[i].maxHp += 50;
             players[i].hp += 50;
+            for (let i = 0; i < layer; i++) {
+                players[i].maxHp += 25;
+                players[i].hp += 25;
+            }
             alert(`Hero${i} got + 50 Maxhealth and + 50 HEALTH`);
             document.getElementById('health' + players[i].tribute).innerHTML = `Hp: ${players[i].hp}`;
         } else if (random == 2) {
             players[i].speed += 10;
+            for (let i = 0; i < layer; i++) {
+                players[i].speed += 10;
+            }
             alert(`Hero${i} got + 10 speed!`);
         } else if (random == 3) {
             players[i].baseDam += 15;
+            for (let i = 0; i < layer; i++) {
+                players[i].baseDam += 10;
+            }
             alert(`Hero${i} got +15 base damage!`);
         } else if (random == 4) {
             players[i].hp += 150;
+            for (let i = 0; i < layer; i++) {
+                players[i].hp += 50;
+            }
         }
     }
 
