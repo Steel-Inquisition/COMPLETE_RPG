@@ -53,18 +53,27 @@ function timeLine() {
 
 function run() {
     let runChance = 0;
+    let logEl = document.getElementById('logMenu');
+    let text;
+
+    turnChange(logEl, text);
 
     runChance = randomInt(0, 10);
-
+    
     if (bossFight) {
-
+        text = `<li>You can't run in a boss fight...</li>`;
     } else {
         if (runChance > 5) {
+            text = `<li>The Team ran away and succeded!</li>`;
             monsters = [];
             endBattle();
         } else {
+            text = `<li>The Team tried to run away and failed!</li>`;
             attack();
         }
+
+        logEl.innerHTML += text;
+
     }
 
 }
