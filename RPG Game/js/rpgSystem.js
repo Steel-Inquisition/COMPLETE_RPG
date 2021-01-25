@@ -72,9 +72,11 @@ function run() {
             attack();
         }
 
-        logEl.innerHTML += text;
 
     }
+
+    logEl.innerHTML += text;
+
 
 }
 
@@ -349,6 +351,8 @@ function nextAttackerBtn() {
 function canRun() {
     if (bossFight) {
         document.getElementById('run-btn').innerHTML = "Can't Run!";
+    } else {
+        document.getElementById('run-btn').innerHTML = "Run!";
     }
 }
 
